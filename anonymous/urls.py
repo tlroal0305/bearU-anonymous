@@ -1,10 +1,9 @@
 from django.urls import path
 from board.views import board
-from user.views import singin
-from user.views import singup
+from user.views import signin, signup
 
 urlpatterns = [
     path("", board, name="board"),
-    path("user/singin", singin, name="singin"),
-    path("user/singup", singup, name="singup"),
+    path("user/signin/", signin, name="signin"),
+    path("user/signup/", signup, name="signup"),
 ]

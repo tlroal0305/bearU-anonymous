@@ -1,7 +1,7 @@
 <!-- page/singin.html -->
 {% extends 'common/base.html' %} {% load static %} {% block content %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'singin.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'signin.css' %}" />
 
 {% for message in messages %}
 <div class="alert alert-warning" role="alert">{{ message }}</div>
@@ -38,7 +38,7 @@
       </div>
 
       <div id="card_footer">
-        <a href="{% url 'singup' %}" id="joinBtn">회원가입</a>
+        <a href="{% url 'signup' %}" id="joinBtn">회원가입</a>
         <button id="loginBtn">로그인</button>
       </div>
     </form>
@@ -47,12 +47,12 @@
 {% endblock %}
 
 <script>
-  let singin_btn = document.getElementById("loginBtn");
+  let signin_btn = document.getElementById("loginBtn");
   let username = document.getElementById("username");
   let password = document.getElementById("password");
-  let singin_form = document.getElementById("singin_form");
+  let signin_form = document.getElementById("signin_form");
 
-  singin_btn.addEventListener("click", () => {
+  signin_btn.addEventListener("click", () => {
     if (!username.value) {
       alert("아이디를 입력해주세요 !");
       return false;
@@ -61,6 +61,6 @@
       alert("비밀번호를 입력해주세요 !");
       return false;
     }
-    singin_form.submit();
+    signin_form.submit();
   });
 </script>

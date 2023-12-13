@@ -1,0 +1,94 @@
+<!-- page/sign.html -->
+{% extends 'common/base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'signup.css' %}" />
+
+{% for message in messages %}
+<div class="alert alert-warning" role="alert">{{ message }}</div>
+{% endfor %}
+
+<div class="card">
+  <div id="card-header">Sign up</div>
+  <div class="card-body">
+    <div id="signupBox">
+      <form method="POST" id="signup_form">
+        {% csrf_token %}
+        <div class="signup_content">
+          <label for="username" class="form-label">아이디</label>
+          <div>
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              id="username"
+            />
+          </div>
+        </div>
+        <div class="signup_content">
+          <label for="password" class="form-label">비밀번호</label>
+          <div>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="password"
+            />
+          </div>
+        </div>
+        <div class="signup_content">
+          <label for="check-password" class="form-label">비밀번호 확인</label>
+          <div>
+            <input
+              type="password"
+              name="check-password"
+              class="form-control"
+              id="check-password"
+            />
+          </div>
+        </div>
+        <div class="signup_content">
+          <label for="nickname" class="form-label">닉네임</label>
+          <div>
+            <input
+              type="text"
+              name="nickname"
+              class="form-control"
+              id="nickname"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="card_footer">
+      <button id="signupBtn">회원가입</button>
+    </div>
+  </div>
+</div>
+<script>
+  let signup_btn = document.getElementById("signupBtn");
+  let username = document.getElementById("username");
+  let password = document.getElementById("password");
+  let check_password = document.getElementById("check-password");
+  let nickname = document.getElementById("nickname");
+  let signup_form = document.getElementById("signup_form");
+
+  signup_btn.addEventListener("click", () => {
+    if (!username.value) {
+      alert("아이디를 입력해주세요 !");
+      return false;
+    }
+    if (!password.value) {
+      alert("비밀번호를 입력해주세요 !");
+      return false;
+    }
+    if (check_password.value !== password.value) {
+      alert("비밀번호를 확인해주세요 !");
+      return false;
+    }
+    if (!nickname.value) {
+      alert("이름을 입력해주세요 !");
+      return false;
+    }
+    signup_form.submit();
+  });
+</script>
+{% endblock %}
