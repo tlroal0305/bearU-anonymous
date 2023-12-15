@@ -40,13 +40,41 @@ label {
   justify-content: center;
   align-items: center;
   margin: 30px 0px;
+  gap: 10px;
 }
 
-button {
+#card_footer a {
+  text-decoration: none;
   border-style: none;
-  background-color: #fad4ae;
+  border-style: none;
+  color: black;
+  background-color: #dff789;
   border-radius: 10px;
   width: 90px;
   height: 40px;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+#joinBtn {
+  text-decoration: none;
+  border-style: none;
+  background-color: #d9f1f1;
+  color: black;
+  border-radius: 10px;
+  width: 90px;
+  height: 40px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert {
+  margin-top: 10px;
 }

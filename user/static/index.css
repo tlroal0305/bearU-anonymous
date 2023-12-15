@@ -1,0 +1,42 @@
+#header {
+  margin-top: 10px;
+  background-color: #576628;
+  width: 100%;
+  height: 100px;
+}
+
+.card {
+  margin: 20px 0px;
+}
+
+.card_body {
+  padding: 15px;
+}
+
+.card_header h5 {
+  font-weight: bold;
+}
+
+.card_main {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 5px;
+  font-size: 15px;
+}
+
+.card_footer {
+  font-size: 13px;
+}
+
+#main_footer {
+  color: black;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+#main_footer a {
+  text-decoration: none;
+  color: black;
+  font-size: 15px;
+}

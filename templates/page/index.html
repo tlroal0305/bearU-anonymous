@@ -1,2 +1,50 @@
-{% extends 'common/base.html' %} {% block content %} {{ title }} 제발 잘 나와라
-{{ content }} {% endblock %}
+{% extends 'common/base.html' %} {% block content %} {% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
+
+<div id="header"></div>
+<div id="main">
+  <div class="row">
+    {% for post in post_set %}
+    <div class="col-6">
+      <div class="card">
+        <div class="card_body">
+          <div class="card_header">
+            <h5>{{ post.title }}</h5>
+            <div>{{ post.content }}</div>
+          </div>
+          <div class="card_main">
+            <div>{{ post.user.nickname }}</div>
+            <div>{{ post.reg_date|date:"Y-m-d" }}</div>
+          </div>
+          <div class="card_footer">
+            <div>{{ post.comment_set.all.count }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div id="main_footer">
+  <div class="row text-center">
+    <div class="col-4 text-start">
+      {% if post_set.has_previous %}
+      <a href="{% url 'board' %}?page={{ post_set.previous_page_number }}"
+        >이전글</a
+      >
+      {% endif %}
+    </div>
+    <div class="col-4 text-center">
+      <div>{{ post_set.number }}/{{ post_set.paginator.num_pages }}</div>
+    </div>
+    <div class="col-4 text-end">
+      {% if post_set.has_next %}
+      <a href="{% url 'board' %}?page={{ post_set.next_page_number }}"
+        >다음글</a
+      >
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

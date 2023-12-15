@@ -56,6 +56,9 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'anonymous.urls'
 
 # 정적 파일을 찾을 디렉토리 추가
+# settings.py
+DEBUG = True
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]

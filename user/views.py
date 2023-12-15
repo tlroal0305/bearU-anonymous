@@ -1,13 +1,15 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from user.models import User
 
+
+# 로그인 로직
 def signin(request):
    if request.method == "GET":
      # 키(title)의 값("할로")를 터미널창에 출력
-     print(request.GET['title'])
+     # print(request.GET['title'])
      return render(request, 'page/signin.html')
       
    if request.method == "POST":
@@ -23,7 +25,8 @@ def signin(request):
        messages.error(request, "입력 값을 확인해주세요.");
        return redirect('signin')
     
-
+    
+# 회원가입 로직
 def signup(request):
    if request.method == "GET":
      return render(request, 'page/signup.html')
@@ -33,7 +36,7 @@ def signup(request):
      password = request.POST['password']
      nickname = request.POST['nickname']
      
-     user = User.objects.filter (username = username )
+     user = User.objects.filter ( username = username )
      if user.exists():
        # 존재하면
        messages.error(request, "이미 가입한 아이디입니다.");
@@ -46,5 +49,11 @@ def signup(request):
          nickname = nickname,
        )
        new_user.save()
-       login(request, new_user)
-       return redirect('board')  
+       return redirect('signin')  
+
+
+# 로그아웃 로직
+def signout(request):
+  if request.method=="GET":
+    logout( request )
+    return redirect ("board")

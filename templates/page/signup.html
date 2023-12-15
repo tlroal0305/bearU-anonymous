@@ -59,12 +59,13 @@
       </form>
     </div>
     <div id="card_footer">
-      <button id="signupBtn">회원가입</button>
+      <a href="{% url 'signin' %}" id="loginBtn">이전</a>
+      <button id="joinBtn">회원가입</button>
     </div>
   </div>
 </div>
 <script>
-  let signup_btn = document.getElementById("signupBtn");
+  let signup_btn = document.getElementById("joinBtn");
   let username = document.getElementById("username");
   let password = document.getElementById("password");
   let check_password = document.getElementById("check-password");

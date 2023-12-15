@@ -15,7 +15,8 @@ class Post ( models.Model ):
     db_table="post"
     
     
-# 댓글 테이블
+# 댓글 테이블 
+# FK- Parents.children_set 
 class Comment ( models.Model ):
   post = models.ForeignKey( Post, on_delete=models.CASCADE )
   content = models.TextField()
