@@ -3,6 +3,22 @@
 <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
 
 <div id="header"></div>
+<div class="row">
+  <div class="col">
+    <form method="get">
+      <div class="input-group">
+        <input
+          type="text"
+          name="search_text"
+          id="search_text"
+          value="{{ search_text }}"
+          placeholder=" 검색어를 입력해주세요 !"
+        />
+        <button type="submit" class="btn btn-outline-secondary">검색</button>
+      </div>
+    </form>
+  </div>
+</div>
 <div id="main">
   <div class="row">
     {% for post in post_set %}
@@ -18,7 +34,7 @@
             <div>{{ post.reg_date|date:"Y-m-d" }}</div>
           </div>
           <div class="card_footer">
-            <div>{{ post.comment_set.all.count }}</div>
+            <div style="font-size: 10px">{{ post.comment_set.all.count }}</div>
           </div>
         </div>
       </div>
@@ -30,7 +46,8 @@
   <div class="row text-center">
     <div class="col-4 text-start">
       {% if post_set.has_previous %}
-      <a href="{% url 'board' %}?page={{ post_set.previous_page_number }}"
+      <a
+        href="{% url 'board' %}?page={{ post_set.previous_page_number }}&search_text={{ search_text }}"
         >이전글</a
       >
       {% endif %}
@@ -40,7 +57,8 @@
     </div>
     <div class="col-4 text-end">
       {% if post_set.has_next %}
-      <a href="{% url 'board' %}?page={{ post_set.next_page_number }}"
+      <a
+        href="{% url 'board' %}?page={{ post_set.next_page_number }}&search_text={{ search_text }}"
         >다음글</a
       >
       {% endif %}
