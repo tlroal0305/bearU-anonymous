@@ -2,8 +2,8 @@ from django.shortcuts import render
 from board.models import Post
 from django.core.paginator import Paginator
 
+# 게시글 리스트 
 def board(request):
-  # 게시글 리스트 
   if request.method == "GET":
     page = request.GET.get('page', 1)
     search_text = request.GET.get('search_text', "")
@@ -17,4 +17,10 @@ def board(request):
       "search_text": search_text 
     }
     return render (request, 'page/index.html', context=context)
+  
+# 게시글 작성 폼
+def post_write( request ):
+  if request.method == "GET":
+    return render( request, "page/post_write.html" )
+
   
