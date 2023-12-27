@@ -24,19 +24,26 @@
     {% for post in post_set %}
     <div class="col-6">
       <div class="card">
-        <div class="card_body">
-          <div class="card_header">
-            <h5>{{ post.title }}</h5>
-            <div>{{ post.content }}</div>
+        <a href="{% url 'post_detail' post.id %}">
+          <div class="card_body">
+            <div class="card_header">
+              <h5>{{ post.title }}</h5>
+              <div id="content">{{ post.content }}</div>
+            </div>
+            <div class="card_main">
+              <div id="nickname">{{ post.user.nickname }}</div>
+              <div id="date">{{ post.reg_date|date:"Y-m-d" }}</div>
+            </div>
+            <div class="card_footer">
+              <span style="font-size: 15px" class="material-symbols-outlined">
+                chat_bubble
+              </span>
+              <div style="font-size: 10px">
+                {{ post.comment_set.all.count }}
+              </div>
+            </div>
           </div>
-          <div class="card_main">
-            <div>{{ post.user.nickname }}</div>
-            <div>{{ post.reg_date|date:"Y-m-d" }}</div>
-          </div>
-          <div class="card_footer">
-            <div style="font-size: 10px">{{ post.comment_set.all.count }}</div>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
     {% endfor %}

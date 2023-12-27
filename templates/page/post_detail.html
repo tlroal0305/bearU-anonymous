@@ -1,0 +1,79 @@
+{% extends 'common/base.html' %} {% block content %} {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'post_detail.css' %}" />
+
+<!-- 게시글 상세페이지 -->
+<div class="card">
+  <div class="card_body1">
+    <div class="row">
+      <div class="col">
+        <div id="title">{{ post.title }}</div>
+        <div id="nickname">{{ post.user.nickname }}</div>
+        <small>{{ post.reg_date|date:"Y-m-d H:i:s" }}</small>
+        <div id="content">{{ post.content }}</div>
+        {% if post.img_url %}
+        <img src="/upload/{{ post.img_url }}" width="300px" />
+        {% endif %}
+        <img />
+      </div>
+    </div>
+  </div>
+  <!-- 새로운 댓글 달기 -->
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card_body2">
+          <form method="post" id="comment_form">
+            {% csrf_token %}
+            <div style="width: 700px">
+              <textarea
+                class="form-control"
+                id="comment"
+                name="comment"
+                placeholder="한번 작성한 글은 삭제할 수 없습니다. 매너를 지켜주세요 !
+          "
+              ></textarea>
+            </div>
+            <a id="write_btn" style="color: gray">댓글 작성</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 달린 댓글  -->
+  {% for comment in post.comment_set.all %}
+  <div class="row">
+    <div class="col">
+      <div class="card" style="margin-top: 10px">
+        <div class="card_body3">
+          <div id="date">{{ comment.reg_date|date:"Y-m-d H:i:s" }}</div>
+          <div id="comment_content">{{ comment.content }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  let comment = document.getElementById("comment");
+  let write_btn = document.getElementById("write_btn");
+  let comment_form = document.getElementById("comment_form");
+
+  // 댓글 내용 작성 버튼
+  write_btn.addEventListener("click", () => {
+    if (comment.value) {
+      comment_form.submit();
+    }
+  });
+
+  // 내용 유/무에 따른 마우스 이벤트 처리
+  comment.addEventListener("keyup", () => {
+    if (comment.value) {
+      write_btn.style.color = "black";
+      write_btn.style.cursor = "pointer";
+    } else {
+      write_btn.style.color = "gray";
+      write_btn.style.cursor = "default";
+    }
+  });
+</script>
+{% endblock %}

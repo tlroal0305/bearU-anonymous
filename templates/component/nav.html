@@ -10,7 +10,7 @@
     <div id="right_menu">
       {% if request.user.is_authenticated %}
 
-      <a style="color: #345f53"> 글쓰기 </a>
+      <a href="{% url 'post_write' %}" style="color: #345f53"> 글쓰기 </a>
       <a href="{% url 'signout' %}"> 로그아웃 </a>
       <span>{{ request.user.nickname }}님 환영합니다 !</span>
       {% else %}

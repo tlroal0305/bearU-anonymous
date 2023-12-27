@@ -10,12 +10,28 @@
   margin-top: 10px;
 }
 
+.card a {
+  text-decoration: none;
+  color: black;
+}
+
 .card_body {
   padding: 15px;
 }
 
 .card_header h5 {
   font-weight: bold;
+}
+
+#nickname,
+#date {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#content {
+  font-size: 17px;
+  font-weight: normal;
 }
 
 .card_main {
@@ -28,6 +44,9 @@
 
 .card_footer {
   font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
 }
 
 #main_footer {
