@@ -37,9 +37,10 @@ def post_write( request ):
     if img:
       img_name = uuid.uuid4()
       ext = img.name.split('.')[-1]
+      img_url = f"/upload/{img_name}.{ext}"
       
-      default_storage.save(f"{img_name}.{ext}", img)
-      img_url = f"{img_name}.{ext}"
+      # 이미지 저장
+      default_storage.save(img_url, img)
       
     
     Post(

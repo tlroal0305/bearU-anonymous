@@ -19,9 +19,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y21r!2s&0ys_)-wy2n!7prgwevdnn*5ul2ot(=7t-f*-06+-d0'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -39,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'board',
+    'storages'
 ]
 
 AUTH_USER_MODEL = "user.User"
@@ -77,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'anonymous.common_context.img_url_context'
             ],
         },
     },
@@ -84,7 +83,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'anonymous.wsgi.application'
 
-
+ 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -138,7 +137,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = 'upload'
+# MEDIA_ROOT = 'upload'
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+import json
+env_json = 'env.json'
+with open(env_json) as f:
+    env_json = json.loads(f.read())
+    
+print(type(env_json))
+
+AWS_ACCESS_KEY_ID = env_json['AWS_ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = env_json['AWS_SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = env_json['S3_BUCKET_NAME']
+
+S3_ROOT_URL = env_json['S3_ROOT_URL']
+SECRET_KEY = env_json['SECRET_KEY']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

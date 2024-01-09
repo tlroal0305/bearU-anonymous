@@ -11,7 +11,7 @@
         <small>{{ post.reg_date|date:"Y-m-d H:i:s" }}</small>
         <div id="content">{{ post.content }}</div>
         {% if post.img_url %}
-        <img src="/upload/{{ post.img_url }}" width="300px" />
+        <img src="{{ IMG_URL }}{{ post.img_url }}" width="300px" />
         {% endif %}
         <img />
       </div>
